@@ -31,16 +31,16 @@ public class Main {
          int precio;
          int cantidad_ejemplares;
          int tamaño;
-         boolean disponibilidad;
+         int codigo_ld = 0;
+         int codigo_lf = 0;
+        boolean disponibilidad;
         System.out.println("   Sistema de Libros  ");
         System.out.println("1.Crear un libro impreso");
         System.out.println("2.Crear un libro digital");
         System.out.println("3.Mostar los libros");
         System.out.println("4.Buscar libro por titulo");
         Scanner teclado = new Scanner(System.in);
-        List<Padre> lista_libros_digitales = new ArrayList<>();
-        List<Padre> lista_libros_impresos = new ArrayList<>();
-
+        List<Padre> lista_Libros = new ArrayList<>();
         while(salir_menu == false){
             menu_opcion = teclado.nextInt();
             switch(menu_opcion){
@@ -54,8 +54,9 @@ public class Main {
                     precio = teclado.nextInt();
                     System.out.println("Escriba cantidad de ejemplares ");
                     cantidad_ejemplares = teclado.nextInt();
-                    Padre l1 = new LibroImpreso(titulo ,autor,precio ,cantidad_ejemplares);
-                    lista_libros_impresos.add(l1);
+                    Padre lf = new LibroImpreso(titulo ,autor,precio ,cantidad_ejemplares, codigo_lf);
+                    codigo_lf++;
+                    lista_Libros.add(lf);
                     break;
                 case 2:
                     teclado.nextLine();
@@ -69,54 +70,40 @@ public class Main {
                     disponibilidad = teclado.nextBoolean();
                     System.out.println("Escriba el tamaño ");
                     tamaño = teclado.nextInt();
-                    Padre l2 = new LibroDigital(titulo ,autor,precio ,tamaño, disponibilidad);
-                    lista_libros_digitales.add(l2);
+                    Padre ld = new LibroDigital(titulo ,autor,precio ,tamaño, disponibilidad, codigo_ld);
+                    codigo_ld++;
+                    lista_Libros.add(ld);
                 case 3:
-                    System.out.println("Libros Digitales");
-                    for(Padre l : lista_libros_digitales ) {
-                        System.out.println(l.mostrarLibro());
-                    }
-                    System.out.println("Libros Impresos");
-                    for(Padre l : lista_libros_impresos ) {
+                    System.out.println("Todos los Libros ");
+                    for(Padre l : lista_Libros ) {
                         System.out.println(l.mostrarLibro());
                     }
                     break;
 
                 case 4:
-                    System.out.print("Escriba el titulo con espacios de manera exacta");
+                    System.out.print("Escriba el titulo del libro");
                     buscador = teclado.next();
-                    for(Padre l : lista_libros_digitales ) {
+                    Boolean encontrado = false;
+                    for(Padre l : lista_Libros ) {
                         if(buscador.equalsIgnoreCase(l.getTitulo())){
-                            System.out.println(l);
-                            int opcion_submenu;
-                            System.out.println("1.Pedir prestado");
-                            System.out.println("2.Devolver");
-                            opcion_submenu = teclado.nextInt();
-                            if(opcion_submenu == 1){
-                                l.prestarLibro();
-                            }else{
-                                l.devolverLibro();
-                            }
-
+                            encontrado = true;
+                            break;
                         }
-
-                    }
-                    for(Padre l : lista_libros_impresos ) {
-                        if(buscador.equalsIgnoreCase(l.getTitulo())){
-                            System.out.println(l);
-                            int opcion_submenu;
-                            System.out.println("1.Pedir prestado");
-                            System.out.println("2.Devolver");
-                            opcion_submenu = teclado.nextInt();
-                            if(opcion_submenu == 1){
-                                l.prestarLibro();
-                            }else{
-                                l.devolverLibro();
-                            }
-
+                        System.out.println("1.Pedir prestado");
+                        System.out.println("2.Devolver");
+                        int opcion_submenu;
+                        opcion_submenu = teclado.nextInt();
+                        if(opcion_submenu == 1){
+                            l.prestarLibro();
+                        }else{
+                            l.devolverLibro();
                         }
-
                     }
+                    if(encontrado == false){
+                        System.out.print("Libro no encontrado");
+                        break;
+                    }
+
 
 
 

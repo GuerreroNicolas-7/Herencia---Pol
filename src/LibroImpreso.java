@@ -4,8 +4,8 @@ public class LibroImpreso extends Padre {
     public LibroImpreso() {
     }
 
-    public LibroImpreso(String titulo, String autor, int precio, int cantidad_ejemplares) {
-        super(titulo, autor, precio);
+    public LibroImpreso(String titulo, String autor, int precio, int cantidad_ejemplares , int codigo) {
+        super(titulo, autor, precio, codigo);
         this.cantidad_ejemplares = cantidad_ejemplares;
     }
 
@@ -19,6 +19,7 @@ public class LibroImpreso extends Padre {
                 "cantidad_ejemplares=" + cantidad_ejemplares +
                 ", titulo='" + titulo + '\'' +
                 ", autor='" + autor + '\'' +
+                ", codigo='" + codigo + '\'' +
                 ", precio=" + precio +
                 '}';
     }
@@ -28,6 +29,7 @@ public class LibroImpreso extends Padre {
         return "titulo:  " + this.titulo + "\n" +
                 "autor:  " + this.autor + "\n" +
                 "precio:  " + this.precio + "\n" +
+                "codigo:  " + "LF" + this.codigo + "\n" +
                 "cantidad_ejemplares: " + this.cantidad_ejemplares;
     }
 

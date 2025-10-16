@@ -5,8 +5,8 @@ public class LibroDigital extends Padre{
     public LibroDigital() {
     }
 
-    public LibroDigital(String titulo, String autor, int precio,  int tamaño, boolean disponibilidad) {
-        super(titulo, autor, precio);
+    public LibroDigital(String titulo, String autor, int precio,  int tamaño, boolean disponibilidad, int codigo) {
+        super(titulo, autor, precio , codigo);
         this.tamaño = tamaño;
         this.disponibilidad = disponibilidad;
     }
@@ -26,6 +26,7 @@ public class LibroDigital extends Padre{
                 ", titulo='" + titulo + '\'' +
                 ", autor='" + autor + '\'' +
                 ", precio=" + precio +
+                ", codigo=" + codigo +
                 ", tamaño=" + tamaño +
                 '}';
     }
@@ -36,6 +37,7 @@ public class LibroDigital extends Padre{
                 "autor:  " + this.autor  + "\n" +
                 "precio:  " + this.precio  + "\n" +
                 "tamaño: " + tamaño + " mbs" + "\n" +
+                "codigo: " + "LD" + codigo +  "\n" +
                 "disponibilidad:  " + this.disponibilidad;
 
     }
